@@ -77,6 +77,51 @@ function seeParagraphTwo() {
   }
 }
 
+function seeParagraphTwo() {
+  var doc = DocumentApp.openById("1T1rHZxnrxEevUBsiG09VcC9-I8zkTVRNneBoP6CyoOk");
+  var body = doc.getBody();
+  var attr = {
+    "FOREGROUND_COLOR": "#ffff00",
+    "BOLD": true
+  }
+  for (var x = 0; x < body.getNumChildren(); x++) {
+    var el = body.getChild(x);
+    // el.setAttributes(attr);
+    var text = el.editAsText();
+
+    text.setForegroundColor(0, (text.getText().length / 2), "#FF0000")
+    text.setBackgroundColor((text.getText().length / 2), (text.getText().length - 1), "#00FF00")
+  }
+}
+
+
+function copyDoc() {
+  var srcDoc = DocumentApp.openById("1T1rHZxnrxEevUBsiG09VcC9-I8zkTVRNneBoP6CyoOk")
+  var tarDoc = DocumentApp.openById("1ZvuuVpawVhKziLJCD54r8t5-VFMAL0Gd8HSrq5xaFIY")
+
+  var srcDocTotal = srcDoc.getNumChildren();
+  var tarDocBody = tarDoc.getBody();
+  tarDocBody.clear()
+  tarDocBody.appendParagraph('Last Updated ' + Date()).setFontSize(8).appendHorizontalRule();
+
+  for (var x = 0; x < srcDocTotal; x++) {
+    var el = srcDoc.getChild(x).copy();
+    var elType = el.getType()
+    if (elType == DocumentApp.ElementType.PARAGRAPH) {
+      tarDocBody.appendParagraph(el)
+    } else if (elType == DocumentApp.ElementType.LIST_ITEM) {
+      tarDocBody.appendListItem(el)
+    } else if (elType == DocumentApp.ElementType.TABLE) {
+      tarDocBody.appendTable(el)
+    }
+
+
+
+
+    Logger.log(el)
+  }
+}
+
 
 
 
