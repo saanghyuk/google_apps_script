@@ -1,11 +1,11 @@
-function firstApp(){
+function firstApp() {
   var welcomeMessage = "Hello World";
-  for (var x = 0; x<10; x++){
+  for (var x = 0; x < 10; x++) {
     Logger.log(welcomeMessage + ' ' + x)
   }
 }
 
-function createDoc(){
+function createDoc() {
   // var doc = DocumentApp.create('New Test Doc')
   var doc = DocumentApp.openById("1T1rHZxnrxEevUBsiG09VcC9-I8zkTVRNneBoP6CyoOk");
   var body = doc.getBody()
@@ -17,7 +17,7 @@ function createDoc(){
   Logger.log(title)
 }
 
-function seeDoc(){
+function seeDoc() {
   var doc = DocumentApp.openById("1T1rHZxnrxEevUBsiG09VcC9-I8zkTVRNneBoP6CyoOk");
   var body = doc.getBody();
   var selection = body.getText();
@@ -28,7 +28,7 @@ function seeDoc(){
 
 }
 
-function seeParagraphOne(){
+function seeParagraphOne() {
   var doc = DocumentApp.openById("1T1rHZxnrxEevUBsiG09VcC9-I8zkTVRNneBoP6CyoOk");
   var body = doc.getBody();
   // var p1 = body.getChild(0);
@@ -44,7 +44,7 @@ function seeParagraphOne(){
   var paraList = body.getParagraphs();
   Logger.log(paraList[1].getText());
   Logger.log(paraList[2].appendText("ADDED"));
-  var a= paraList[2].getAttributes();
+  var a = paraList[2].getAttributes();
   Logger.log(a);
   var style = {}
   style[DocumentApp.Attribute.HORIZONTAL_ALIGNMENT] = DocumentApp.HorizontalAlignment.RIGHT;
@@ -58,18 +58,18 @@ function seeParagraphOne(){
 
 }
 
-function seeParagraphTwo(){
+function seeParagraphTwo() {
   var doc = DocumentApp.openById("1T1rHZxnrxEevUBsiG09VcC9-I8zkTVRNneBoP6CyoOk");
   var body = doc.getBody();
   // Logger.log(body.getNumChildren())
   Logger.log(body.getParagraphs().length)
 
   body.replaceText('content', 'NEW UPDATED STRING')
-  for (var x=0; x<body.getNumChildren(); x++){
+  for (var x = 0; x < body.getNumChildren(); x++) {
     var el = body.getChild(x);
     // Logger.log(el.getText());
-    if(el.getType() == 'PARAGRAPH'){
-      el.appendText('==='+el.getText().length)
+    if (el.getType() == 'PARAGRAPH') {
+      el.appendText('===' + el.getText().length)
       Logger.log(el.getText());
       Logger.log(el.getText().length);
 
